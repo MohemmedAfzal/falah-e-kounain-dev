@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namaz Timings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Namaz Timings for Today</h1>
+        <div id="namaz-timings">
+            <table>
+                <th class="head">Prayer</th>
+                <th class="head">Prayer Timing Starts</th>
+                <th class="head">Azan Timing</th>
+                <th class="head">Iqyamah Timing</th>
+                <th class="head">Prayer Timing Ends</th>
+                <tr>
+                    <th>Fajr</th>
+                    <td><p id="fajr-starts"></p></td>
+                    <td><p id="fajr-azan"></p></td>
+                    <td><p id="fajr"></p></td>
+                    <td><p id="fajr-ends"></p></td>
+                </tr>
+                <tr>
+                    <th>Zuhar</th>
+                    <td><p id="zuhar-starts"></p></td>
+                    <td><p id="zuhar-azan"></p></td>
+                    <td><p id="zuhar"></p></td>
+                    <td><p id="zuhar-ends"></p></td>
+                </tr>
+                <tr>
+                    <th>Asar</th>
+                    <td><p id="asar-starts"></p></td>
+                    <td><p id="asar-azan"></p></td>
+                    <td><p id="asar"></p></td>
+                    <td><p id="asar-ends"></p></td>
+                </tr>
+                <tr>
+                    <th>Magrib</th>
+                    <td><p id="maghrib-starts"></p></td>
+                    <td><p id="maghrib-azan"></p></td>
+                    <td><p id="maghrib"></p></td>
+                    <td><p id="maghrib-ends"></p></td>
+                </tr>
+                <tr>
+                    <th>Isha</th>
+                    <td><p id="isha-starts"></p></td>
+                    <td><p id="isha-azan"></p></td>
+                    <td><p id="isha"></p></td>
+                    <td><p id="isha-ends"></p></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
