@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function fetchExcelData(currentDate) {
-    fetch('namaz-timings.xlsx') // Adjust the path to your Excel file
+    fetch('excel/namaz-timings.xlsx') // Adjust the path to your Excel file
         .then(response => response.arrayBuffer())
         .then(data => {
             const workbook = XLSX.read(data, { type: 'array' });
