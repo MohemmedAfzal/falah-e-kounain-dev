@@ -1,15 +1,64 @@
 /* styles.css */
 body {
-    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 0;
     background-color: black;
+    font-family: Verdana, sans-serif;
+}
+.container{
+    height: auto;
+    max-width: 100%;
+}
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.nav .logo{
+    width: 100px;
+    height: 100px;
+}
+li{
+    list-style: none;
+}
+.nav-links{
+    display: flex;
+}
+.nav a{
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+.nav-toggle{
+    display: none;
+}
+.nav a:hover{
+    text-decoration: underline;
+    text-decoration-color: red;
+    text-decoration-thickness: 5px ;
+    font-size: 18px;
+    transition: 0.5s;
+}
+.container img{
+    width: 400px;
+    height: 350px;
+    border-radius: 50px 80px;
 }
 
-.container {
+
+.faraz-namaz-card {
+    height: auto;
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.nafil-prayer-card{
+    margin-top: 20%;
     height: auto;
     text-align: center;
     background: white;
@@ -51,8 +100,8 @@ color: black;
 }
 
 @media (max-width: 768px) {
-    .container {
-        width: 90%; /* Adjust container width for smaller screens */
+    .faraz-namaz-card,.nafil-prayer-card {
+        width: 90%; /* Adjust faraz-namaz-card width for smaller screens */
         padding: 15px; /* Adjust padding for smaller screens */
     }
 
@@ -65,17 +114,52 @@ color: black;
     }
 }
 
-@media (max-width: 480px) {
-    .container {
-        width: 95%; /* Adjust container width for very small screens */
+@media (max-width: 500px) {
+    .faraz-namaz-card{
+        margin-top: 10%;
+        width: 100%; /* Adjust faraz-namaz-card width for very small screens */
         padding: 10px; /* Adjust padding for very small screens */
     }
 
-    #namaz-timings p {
-        font-size: 14px; /* Adjust font size for very small screens */
+    .nafil-prayer-card{
+        width: 100%;
+        padding: 10px; /* Adjust padding for very small screens */
     }
 
+    #faraz-namaz-timings p {
+        font-size: 14px; /* Adjust font size for very small screens */
+    }
+    #nafil-namaz-timings p {
+        font-size: 14px; /* Adjust font size for very small screens */
+    }
     th, td {
         padding: 8px; /* Adjust padding for very small screens */
+    }
+    .nav{
+        flex-direction: row-reverse;
+        align-items: flex-start;
+    }
+    .nav img{
+        width: 5%;
+    }
+    li{
+        padding: 10px;
+    }
+    .nav-links{
+        width: 95%;
+        margin-top: 0;
+        display: block;
+        padding: 15px;
+        background-color: antiquewhite;
+    }
+    .nav a{
+        color: black;
+    }
+    .nav-toggle {
+        margin: 10px;
+        display: block;
+        color: black;
+        padding: 10px;
+        background-color: white;
     }
 }
