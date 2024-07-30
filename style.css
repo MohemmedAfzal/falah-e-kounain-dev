@@ -137,7 +137,13 @@ color: black;
         width: 100%;
         padding: 10px; /* Adjust padding for very small screens */
     }
-
+    .makrooh-prayer-timing-card{
+        width: 100%;
+        padding: 10px; /* Adjust padding for very small screens */
+    }
+    #makrooh-prayer-timings p {
+        font-size: 14px; /* Adjust font size for very small screens */
+    }
     #faraz-namaz-timings p {
         font-size: 14px; /* Adjust font size for very small screens */
     }
