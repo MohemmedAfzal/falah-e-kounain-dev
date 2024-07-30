@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const currentDate = new Date();
     fetchFarazNamazData(currentDate);
     fetchNafilNamazData(currentDate);
+    fetchMakroohNamazTimings(currentDate);
 });
 
 function fetchFarazNamazData(currentDate) {
@@ -86,6 +87,42 @@ function fetchNafilNamazData(currentDate) {
                 document.getElementById("date").textContent= new Intl.DateTimeFormat('en-TN-u-ca-islamic', options).format(today);
                 document.getElementById('sehri').textContent = excelTimeToJSTimeString(todaysTimings['sehri']);
                 document.getElementById('iftari').textContent = excelTimeToJSTimeString(todaysTimings['iftari']);
+            } else {
+                document.getElementById('namaz-timings').innerHTML = '<p>No timings available for today.</p>';
+            }
+        })
+        .catch(error => console.error('Error fetching the Excel file:', error));
+}
+function fetchMakroohNamazTimings(currentDate) {
+    fetch('excel/makrooh-timings.xlsx') // Adjust the path to your Excel file
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            const workbook = XLSX.read(data, {type: 'array'});
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+
+            const todaysTimings = jsonData.find(entry => {
+                const excelDate = new Date((entry.Date - (25567 + 2)) * 86400 * 1000);
+                return excelDate.toDateString() === currentDate.toDateString();
+            });
+            const today = new Date();
+            const options = {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                calendar: 'islamic',
+                timeZone: 'Asia/Kolkata'
+            };
+
+            if (todaysTimings) {
+                document.getElementById('sunrise-starts').textContent = excelTimeToJSTimeString(todaysTimings['sunrise-starts']);
+                document.getElementById('sunrise-ends').textContent = excelTimeToJSTimeString(todaysTimings['sunrise-ends']);
+                document.getElementById('junoob-starts').textContent = excelTimeToJSTimeString(todaysTimings['junoob-starts']);
+                document.getElementById('junoob-ends').textContent = excelTimeToJSTimeString(todaysTimings['junoob-ends']);
+                document.getElementById('sunset-starts').textContent = excelTimeToJSTimeString(todaysTimings['sunset-starts']);
+                document.getElementById('sunset-ends').textContent = excelTimeToJSTimeString(todaysTimings['sunset-ends']);
             } else {
                 document.getElementById('namaz-timings').innerHTML = '<p>No timings available for today.</p>';
             }
