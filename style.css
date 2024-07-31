@@ -7,6 +7,15 @@ body {
     background-color: black;
     font-family: Verdana, sans-serif;
 }
+.calendar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #63E6BE;
+}
+.calendar #gregorian-date{
+    padding-left: 50%;
+}
 .container{
     height: auto;
     max-width: 100%;
