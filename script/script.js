@@ -84,7 +84,6 @@ function fetchNafilNamazData(currentDate) {
                 document.getElementById('chast-ends').textContent = excelTimeToJSTimeString(todaysTimings['chast-ends']);
                 document.getElementById('awwabeen-starts').textContent = todaysTimings['awwabeen-starts'];
                 document.getElementById('awwabeen-ends').textContent = excelTimeToJSTimeString(todaysTimings['awwabeen-ends']);
-                document.getElementById("gregorian-date").textContent= new Date().toDateString();
                 document.getElementById("islamic-date").textContent= new Intl.DateTimeFormat(today, options).format(today);
                 document.getElementById('sehri').textContent = excelTimeToJSTimeString(todaysTimings['sehri']);
                 document.getElementById('iftari').textContent = excelTimeToJSTimeString(todaysTimings['iftari']);

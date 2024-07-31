@@ -8,13 +8,13 @@ body {
     font-family: Verdana, sans-serif;
 }
 .calendar{
-    width: 100%;
+    width: 70%;
     display: flex;
     justify-content: space-between;
-    color: #63E6BE;
+    color: gray;
 }
 .calendar #gregorian-date{
-    padding-left: 50%;
+    padding-left: 80%;
 }
 .container{
     height: auto;
@@ -188,5 +188,8 @@ color: black;
         color: black;
         padding: 10px;
         background-color: white;
+    }
+    .calendar #gregorian-date{
+        padding-left: 15%;
     }
 }
