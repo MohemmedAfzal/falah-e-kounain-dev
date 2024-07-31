@@ -157,7 +157,8 @@ function fetchUpcomingNamaz(todaysTimings) {
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
 
-    const strTime = hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ' ' + ampm;
+    const time = hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ' ' + ampm;
+    const strTime = convertToTime(time);
 
     if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr-starts'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr-ends']))) {
         document.getElementById('upcoming-namaz').textContent = "Fajr: " + excelTimeToJSTimeString(todaysTimings['fajr']);
@@ -172,34 +173,21 @@ function fetchUpcomingNamaz(todaysTimings) {
     }
 }
 
-function convertToTime(timeString) {
-// Create a new Date object
-    let date = new Date();
+function convertToTime(time) {
+    let [timePart, modifier] = time.split(' ');
 
-// Split the time string into hours, minutes, and period (AM/PM)
-    let [time, period] = timeString.split(' ');
-    let [hours, minutes] = time.split(':');
+    let [hours, minutes] = timePart.split(':');
+    hours = parseInt(hours, 10);
 
-// Convert hours to 24-hour format based on the period
-    hours = period === 'PM' ? parseInt(hours) % 12 + 12 : parseInt(hours) % 12;
-
-// Set the hours and minutes on the date object
-    date.setHours(hours);
-    date.setMinutes(minutes);
-    date.setSeconds(0);
-    date.setMilliseconds(0);
-
-// Output the time in 12-hour format with AM/PM
-    function formatTime(date) {
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // the hour '0' should be '12'
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        let strTime = hours + ':' + minutes + ' ' + ampm;
-        return strTime;
+    if (modifier === 'PM' && hours !== 12) {
+        hours += 12;
+    } else if (modifier === 'AM' && hours === 12) {
+        hours = 0;
     }
 
-    return formatTime(date);
+    // Format hours and minutes to always have two digits
+    hours = hours.toString().padStart(2, '0');
+    minutes = minutes.padStart(2, '0');
+
+    return `${hours}:${minutes}`;
 }

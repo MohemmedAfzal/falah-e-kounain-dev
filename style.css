@@ -1,4 +1,17 @@
 /* styles.css */
+@keyframes upcoming-namaz {
+    0%   {font-size: 20px;}
+    25%  {font-size: 16px;}
+    50%  {font-size: 14px}
+    75%  {font-size: 16px}
+    100% {font-size: 20px;}
+}
+#upcoming-namaz {
+    color: red;
+    animation-name: upcoming-namaz;
+    animation-duration: 4s;
+    animation-iteration-count: 10;
+}
 body {
     display: flex;
     justify-content: center;
