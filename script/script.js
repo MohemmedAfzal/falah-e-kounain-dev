@@ -160,13 +160,13 @@ function fetchUpcomingNamaz(todaysTimings) {
     const time = hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ' ' + ampm;
     const strTime = convertToTime(time);
 
-    if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr-starts'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr-ends']))) {
+    if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['isha'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr']))) {
         document.getElementById('upcoming-namaz').textContent = "Fajr: " + excelTimeToJSTimeString(todaysTimings['fajr']);
-    }else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar-starts'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar-ends']))) {
+    }else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar']))) {
         document.getElementById('upcoming-namaz').textContent = "Zuhar: " + excelTimeToJSTimeString(todaysTimings['zuhar']);
-    }else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['asar-starts'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['asar-ends']))) {
+    }else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['asar']))) {
         document.getElementById('upcoming-namaz').textContent = "Asar: " + excelTimeToJSTimeString(todaysTimings['asar']);
-    }else if(strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['maghrib-starts'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['maghrib-ends']))) {
+    }else if(strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['asar'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['maghrib']))) {
         document.getElementById('upcoming-namaz').textContent = "Magribh: " + excelTimeToJSTimeString(todaysTimings['maghrib']);
     }else {
         document.getElementById('upcoming-namaz').textContent = "Isha: " + excelTimeToJSTimeString(todaysTimings['isha']);
