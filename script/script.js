@@ -67,6 +67,22 @@ function fetchNafilNamazData(currentDate) {
                 return excelDate.toDateString() === currentDate.toDateString();
             });
             const today = new Date();
+            // let currentIslamicMonth= " ";
+            // alert(today.toJSON())
+            // switch (today.getMonth().toString().toLowerCase()){
+            //     case "january":  currentIslamicMonth= "Muharram";
+            //     case "february":  currentIslamicMonth= "Safar";
+            //     case "march":  currentIslamicMonth= "Rabi-Ul-Awwal";
+            //     case "april":  currentIslamicMonth= "Rabi-Ul-Aakhir";
+            //     case "may":  currentIslamicMonth= "Jamadil-Awwal";
+            //     case "june":  currentIslamicMonth= "Jamadil-Aakhir";
+            //     case "july":  currentIslamicMonth= "Rajab";
+            //     case "august":  currentIslamicMonth= "Shabaan";
+            //     case "september":  currentIslamicMonth= "Ramazan";
+            //     case "october":  currentIslamicMonth= "Shawwal";
+            //     case "november":  currentIslamicMonth= "Zi-Qaida";
+            //     case "december":  currentIslamicMonth= "Zil-Hajj";
+            // }
             const options = {
                 day: 'numeric',
                 month: 'long',
@@ -74,6 +90,7 @@ function fetchNafilNamazData(currentDate) {
                 calendar: 'islamic',
                 timeZone: 'Asia/Kolkata'
             };
+            document.getElementById("islamic-date").textContent = new Intl.DateTimeFormat(today, options).format(today);
 
             if (todaysTimings) {
                 document.getElementById('tahajjud-starts').textContent = todaysTimings['tahajjud-starts'];
@@ -84,7 +101,6 @@ function fetchNafilNamazData(currentDate) {
                 document.getElementById('chast-ends').textContent = excelTimeToJSTimeString(todaysTimings['chast-ends']);
                 document.getElementById('awwabeen-starts').textContent = todaysTimings['awwabeen-starts'];
                 document.getElementById('awwabeen-ends').textContent = excelTimeToJSTimeString(todaysTimings['awwabeen-ends']);
-                document.getElementById("islamic-date").textContent = new Intl.DateTimeFormat(today, options).format(today);
                 document.getElementById('sehri').textContent = excelTimeToJSTimeString(todaysTimings['sehri']);
                 document.getElementById('iftari').textContent = excelTimeToJSTimeString(todaysTimings['iftari']);
             } else {
@@ -159,7 +175,7 @@ function fetchUpcomingNamaz(todaysTimings) {
 
     const time = hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ' ' + ampm;
     const strTime = convertToTime(time);
-
+    alert(convertToTime(excelTimeToJSTimeString(todaysTimings['fajr'])))
     if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['isha'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr']))) {
         document.getElementById('upcoming-namaz').textContent = "Fajr: " + excelTimeToJSTimeString(todaysTimings['fajr']);
     }else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar']))) {
@@ -168,8 +184,11 @@ function fetchUpcomingNamaz(todaysTimings) {
         document.getElementById('upcoming-namaz').textContent = "Asar: " + excelTimeToJSTimeString(todaysTimings['asar']);
     }else if(strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['asar'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['maghrib']))) {
         document.getElementById('upcoming-namaz').textContent = "Magribh: " + excelTimeToJSTimeString(todaysTimings['maghrib']);
-    }else {
+    }else if(strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['maghrib'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['isha']))) {
         document.getElementById('upcoming-namaz').textContent = "Isha: " + excelTimeToJSTimeString(todaysTimings['isha']);
+    }
+    else if(strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['isha']))) {
+        document.getElementById('upcoming-namaz').textContent = "Fajr: " + excelTimeToJSTimeString(todaysTimings['fajr']);
     }
 }
 
