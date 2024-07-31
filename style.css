@@ -67,7 +67,7 @@ li{
 .container img{
     width: 400px;
     height: 350px;
-    border-radius: 50px 80px;
+    border-radius: 50px 50px;
 }
 .upcoming-namaz{
     height: auto;
