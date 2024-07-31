@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('nav-toggle').onclick = function () {
         document.getElementById('nav-links').classList.toggle('show');
@@ -25,6 +24,7 @@ function fetchFarazNamazData(currentDate) {
             });
 
             if (todaysTimings) {
+                fetchUpcomingNamaz(todaysTimings);
                 document.getElementById('fajr-starts').textContent = excelTimeToJSTimeString(todaysTimings['fajr-starts']);
                 document.getElementById('fajr-azan').textContent = excelTimeToJSTimeString(todaysTimings['fajr-azan']);
                 document.getElementById('fajr').textContent = excelTimeToJSTimeString(todaysTimings['fajr']);
@@ -84,7 +84,7 @@ function fetchNafilNamazData(currentDate) {
                 document.getElementById('chast-ends').textContent = excelTimeToJSTimeString(todaysTimings['chast-ends']);
                 document.getElementById('awwabeen-starts').textContent = todaysTimings['awwabeen-starts'];
                 document.getElementById('awwabeen-ends').textContent = excelTimeToJSTimeString(todaysTimings['awwabeen-ends']);
-                document.getElementById("islamic-date").textContent= new Intl.DateTimeFormat(today, options).format(today);
+                document.getElementById("islamic-date").textContent = new Intl.DateTimeFormat(today, options).format(today);
                 document.getElementById('sehri').textContent = excelTimeToJSTimeString(todaysTimings['sehri']);
                 document.getElementById('iftari').textContent = excelTimeToJSTimeString(todaysTimings['iftari']);
             } else {
@@ -93,6 +93,7 @@ function fetchNafilNamazData(currentDate) {
         })
         .catch(error => console.error('Error fetching the Excel file:', error));
 }
+
 function fetchMakroohNamazTimings(currentDate) {
     fetch('excel/makrooh-timings.xlsx') // Adjust the path to your Excel file
         .then(response => response.arrayBuffer())
@@ -129,6 +130,7 @@ function fetchMakroohNamazTimings(currentDate) {
         })
         .catch(error => console.error('Error fetching the Excel file:', error));
 }
+
 function excelTimeToJSTimeString(excelTime) {
     const totalSeconds = excelTime * 24 * 60 * 60;
     let hours = Math.floor(totalSeconds / 3600);
@@ -144,4 +146,60 @@ function excelTimeToJSTimeString(excelTime) {
     const pad = (num) => num.toString().padStart(2, '0');
 
     return `${pad(hours)}:${pad(minutes)} ${period}`;
+}
+
+function fetchUpcomingNamaz(todaysTimings) {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+
+    const strTime = hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ' ' + ampm;
+
+    if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr-starts'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr-ends']))) {
+        document.getElementById('upcoming-namaz').textContent = "Fajr: " + excelTimeToJSTimeString(todaysTimings['fajr']);
+    }else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar-starts'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar-ends']))) {
+        document.getElementById('upcoming-namaz').textContent = "Zuhar: " + excelTimeToJSTimeString(todaysTimings['zuhar']);
+    }else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['asar-starts'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['asar-ends']))) {
+        document.getElementById('upcoming-namaz').textContent = "Asar: " + excelTimeToJSTimeString(todaysTimings['asar']);
+    }else if(strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['maghrib-starts'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['maghrib-ends']))) {
+        document.getElementById('upcoming-namaz').textContent = "Magribh: " + excelTimeToJSTimeString(todaysTimings['maghrib']);
+    }else {
+        document.getElementById('upcoming-namaz').textContent = "Isha: " + excelTimeToJSTimeString(todaysTimings['isha']);
+    }
+}
+
+function convertToTime(timeString) {
+// Create a new Date object
+    let date = new Date();
+
+// Split the time string into hours, minutes, and period (AM/PM)
+    let [time, period] = timeString.split(' ');
+    let [hours, minutes] = time.split(':');
+
+// Convert hours to 24-hour format based on the period
+    hours = period === 'PM' ? parseInt(hours) % 12 + 12 : parseInt(hours) % 12;
+
+// Set the hours and minutes on the date object
+    date.setHours(hours);
+    date.setMinutes(minutes);
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+
+// Output the time in 12-hour format with AM/PM
+    function formatTime(date) {
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        let strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+
+    return formatTime(date);
 }
