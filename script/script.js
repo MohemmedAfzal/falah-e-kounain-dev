@@ -25,6 +25,8 @@ function fetchFarazNamazData(currentDate) {
 
             if (todaysTimings) {
                 fetchUpcomingNamaz(todaysTimings);
+                fetchZuharNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['zuhar']));
+
                 document.getElementById('fajr-starts').textContent = excelTimeToJSTimeString(todaysTimings['fajr-starts']);
                 document.getElementById('fajr-azan').textContent = excelTimeToJSTimeString(todaysTimings['fajr-azan']);
                 document.getElementById('fajr').textContent = excelTimeToJSTimeString(todaysTimings['fajr']);
@@ -208,4 +210,59 @@ function convertToTime(time) {
     minutes = minutes.padStart(2, '0');
 
     return `${hours}:${minutes}`;
+}
+
+function fetchZuharNamazTimingInOtherMasjid(zuharTimeString){
+    fetch('excel/zuhar-timings.xlsx')
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+            const zuharTime = parseTimeString(zuharTimeString);
+            populateTable(jsonData, zuharTime);
+        });
+}
+function populateTable(data, zuharTime) {
+    const tableBody = document.getElementById('masjidTable').getElementsByTagName('tbody')[0];
+    tableBody.innerHTML = ''; // Clear previous data
+    data.forEach(row => {
+        const tr = document.createElement('tr');
+        const tdName = document.createElement('td');
+        const tdTimeAdjustment = document.createElement('td');
+        const tdZuharTime = document.createElement('td');
+
+        tdName.textContent = row['masjid'];
+        tdTimeAdjustment.textContent = row['time'];
+        const adjustedTime = new Date(zuharTime);
+        adjustedTime.setMinutes(adjustedTime.getMinutes() + parseInt(row['time'], 10));
+        tdZuharTime.textContent = formatTime(adjustedTime);
+
+        tr.appendChild(tdName);
+        tr.appendChild(tdTimeAdjustment);
+        tr.appendChild(tdZuharTime);
+        tableBody.appendChild(tr);
+    });
+}
+function parseTimeString(timeString) {
+    const [time, modifier] = timeString.split(' ');
+    let [hours, minutes] = time.split(':');
+    hours = parseInt(hours, 10);
+    if (hours === 12) {
+        hours = 0;
+    }
+    if (modifier === 'PM') {
+        hours += 12;
+    }
+    return new Date(`1970-01-01T${hours.toString().padStart(2, '0')}:${minutes}:00`);
+}
+
+function formatTime(date) {
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    return `${hours.toString().padStart(2, '0')}:${minutes} ${ampm}`;
 }

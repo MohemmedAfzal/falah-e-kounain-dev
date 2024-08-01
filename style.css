@@ -73,7 +73,16 @@ li{
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     margin-bottom: 10%;
 }
+.zuhar-timings{
+    margin-top: 10%;
+    height: auto;
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 
+}
 .faraz-namaz-card {
     height: auto;
     text-align: center;
@@ -170,8 +179,15 @@ color: black;
         width: 100%;
         padding: 10px; /* Adjust padding for very small screens */
     }
+    .zuhar-timings{
+        width: 100%;
+        padding: 10px; /* Adjust padding for very small screens */
+    }
     .upcoming-namaz p{
         font-size: 14px; /* Adjust font size for very small screens */
+    }
+    .zuhar-timings{
+        font-size: 14px;
     }
     #makrooh-prayer-timings p {
         font-size: 14px; /* Adjust font size for very small screens */
