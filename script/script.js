@@ -26,7 +26,9 @@ function fetchFarazNamazData(currentDate) {
             if (todaysTimings) {
                 fetchUpcomingNamaz(todaysTimings);
                 fetchZuharNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['zuhar']));
-                // fetchAsrNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['asar']))
+                fetchAsrNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['asar']));
+                fetchIshaEarlyNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['isha-azan']));
+                fetchIshaLaterNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['isha']))
 
                 document.getElementById('fajr-starts').textContent = excelTimeToJSTimeString(todaysTimings['fajr-starts']);
                 document.getElementById('fajr-azan').textContent = excelTimeToJSTimeString(todaysTimings['fajr-azan']);
@@ -180,16 +182,15 @@ function fetchUpcomingNamaz(todaysTimings) {
     const strTime = convertToTime(time);
     if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['isha'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr']))) {
         document.getElementById('upcoming-namaz').textContent = "Fajr: " + excelTimeToJSTimeString(todaysTimings['fajr']);
-    }else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar']))) {
+    } else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar']))) {
         document.getElementById('upcoming-namaz').textContent = "Zuhar: " + excelTimeToJSTimeString(todaysTimings['zuhar']);
-    }else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['asar']))) {
+    } else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['asar']))) {
         document.getElementById('upcoming-namaz').textContent = "Asar: " + excelTimeToJSTimeString(todaysTimings['asar']);
-    }else if(strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['asar'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['maghrib']))) {
+    } else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['asar'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['maghrib']))) {
         document.getElementById('upcoming-namaz').textContent = "Magribh: " + excelTimeToJSTimeString(todaysTimings['maghrib']);
-    }else if(strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['maghrib'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['isha']))) {
+    } else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['maghrib'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['isha']))) {
         document.getElementById('upcoming-namaz').textContent = "Isha: " + excelTimeToJSTimeString(todaysTimings['isha']);
-    }
-    else if(strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['isha']))) {
+    } else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['isha']))) {
         document.getElementById('upcoming-namaz').textContent = "Fajr: " + excelTimeToJSTimeString(todaysTimings['fajr']);
     }
 }
@@ -213,32 +214,69 @@ function convertToTime(time) {
     return `${hours}:${minutes}`;
 }
 
-function fetchZuharNamazTimingInOtherMasjid(zuharTimeString){
+function fetchZuharNamazTimingInOtherMasjid(zuharTimeString) {
     fetch('excel/zuhar-timings.xlsx')
         .then(response => response.arrayBuffer())
         .then(data => {
-            const workbook = XLSX.read(data, { type: 'array' });
+            const workbook = XLSX.read(data, {type: 'array'});
             const firstSheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[firstSheetName];
             const jsonData = XLSX.utils.sheet_to_json(worksheet);
             const zuharTime = parseTimeString(zuharTimeString);
-            populateTable(jsonData, zuharTime);
+            populateTable(jsonData, zuharTime, "zuhar");
         });
 }
-// function fetchAsrNamazTimingInOtherMasjid(asrTimeString){
-//     fetch('excel/zuhar-timings.xlsx')
-//         .then(response => response.arrayBuffer())
-//         .then(data => {
-//             const workbook = XLSX.read(data, { type: 'array' });
-//             const firstSheetName = workbook.SheetNames[0];
-//             const worksheet = workbook.Sheets[firstSheetName];
-//             const jsonData = XLSX.utils.sheet_to_json(worksheet);
-//             const asrTime = parseTimeString(asrTimeString);
-//             populateTable(jsonData, asrTime);
-//         });
-// }
-function populateTable(data, diffNamazTime) {
-    const tableBody = document.getElementById('masjidTable').getElementsByTagName('tbody')[0];
+
+function fetchAsrNamazTimingInOtherMasjid(asrTimeString) {
+    fetch('excel/asr-timings.xlsx')
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            const workbook = XLSX.read(data, {type: 'array'});
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+            const asrTime = parseTimeString(asrTimeString);
+            populateTable(jsonData, asrTime, "asr");
+        });
+}
+
+function fetchIshaEarlyNamazTimingInOtherMasjid(ishaTimeString) {
+    fetch('excel/isha-early-timings.xlsx')
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            const workbook = XLSX.read(data, {type: 'array'});
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+            const ishaTime = parseTimeString(ishaTimeString);
+            populateTable(jsonData, ishaTime, "isha_early");
+        });
+}
+
+function fetchIshaLaterNamazTimingInOtherMasjid(ishaTimeString) {
+    fetch('excel/isha-later-timings.xlsx')
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            const workbook = XLSX.read(data, {type: 'array'});
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+            const ishaTime = parseTimeString(ishaTimeString);
+            populateTable(jsonData, ishaTime, "isha_later");
+        });
+}
+
+function populateTable(data, diffNamazTime, namazTime) {
+    let tableBody;
+    if (namazTime === "zuhar") {
+        tableBody = document.getElementById('masjidTable').getElementsByTagName('tbody')[0];
+    } else if (namazTime === "asr") {
+        tableBody = document.getElementById('masjidTableOnAsr').getElementsByTagName('tbody')[0];
+    } else if (namazTime === "isha_early") {
+        tableBody = document.getElementById('masjidTableOnIsha').getElementsByTagName('tbody')[0];
+    } else if (namazTime === "isha_later") {
+        tableBody = document.getElementById('masjidTableOnIshaLater').getElementsByTagName('tbody')[0];
+    }
     tableBody.innerHTML = ''; // Clear previous data
     data.forEach(row => {
         const tr = document.createElement('tr');
@@ -258,6 +296,7 @@ function populateTable(data, diffNamazTime) {
         tableBody.appendChild(tr);
     });
 }
+
 function parseTimeString(timeString) {
     const [time, modifier] = timeString.split(' ');
     let [hours, minutes] = time.split(':');
