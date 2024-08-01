@@ -249,7 +249,7 @@ function fetchIshaEarlyNamazTimingInOtherMasjid(ishaTimeString) {
             const worksheet = workbook.Sheets[firstSheetName];
             const jsonData = XLSX.utils.sheet_to_json(worksheet);
             const ishaTime = parseTimeString(ishaTimeString);
-            populateTable(jsonData, ishaTime, "isha_early");
+            populateTable(jsonData, ishaTime, "isha");
         });
 }
 
@@ -262,7 +262,7 @@ function fetchIshaLaterNamazTimingInOtherMasjid(ishaTimeString) {
             const worksheet = workbook.Sheets[firstSheetName];
             const jsonData = XLSX.utils.sheet_to_json(worksheet);
             const ishaTime = parseTimeString(ishaTimeString);
-            populateTable(jsonData, ishaTime, "isha_later");
+            populateTable(jsonData, ishaTime, "isha");
         });
 }
 
@@ -270,14 +270,14 @@ function populateTable(data, diffNamazTime, namazTime) {
     let tableBody;
     if (namazTime === "zuhar") {
         tableBody = document.getElementById('masjidTable').getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = ''; // Clear previous data
     } else if (namazTime === "asr") {
         tableBody = document.getElementById('masjidTableOnAsr').getElementsByTagName('tbody')[0];
-    } else if (namazTime === "isha_early") {
+        tableBody.innerHTML = ''; // Clear previous data
+    } else if (namazTime === "isha") {
         tableBody = document.getElementById('masjidTableOnIsha').getElementsByTagName('tbody')[0];
-    } else if (namazTime === "isha_later") {
-        tableBody = document.getElementById('masjidTableOnIshaLater').getElementsByTagName('tbody')[0];
     }
-    tableBody.innerHTML = ''; // Clear previous data
+
     data.forEach(row => {
         const tr = document.createElement('tr');
         const tdName = document.createElement('td');
