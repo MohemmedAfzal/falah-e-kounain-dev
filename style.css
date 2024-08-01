@@ -163,14 +163,14 @@ color: black;
         width: 100%;
         padding: 10px; /* Adjust padding for very small screens */
     }
-    .zuhar-namaz-timings{
+    .zuhar-namaz-timings,.asr-namaz-timings,.isha-namaz-timings{
         width: 100%;
         padding: 10px; /* Adjust padding for very small screens */
     }
     .upcoming-namaz p{
         font-size: 14px; /* Adjust font size for very small screens */
     }
-    .zuhar-namaz-timings{
+    .zuhar-namaz-timings,.asr-namaz-timings,.isha-namaz-timings{
         font-size: 14px;
     }
     #makrooh-prayer-timings p {
