@@ -95,7 +95,19 @@ function fetchNafilNamazData(currentDate) {
                 calendar: 'islamic',
                 timeZone: 'Asia/Kolkata'
             };
+            const date = String(today.getDate()).padStart(2, '0');
+
+            const monthNames = [
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            const month = monthNames[today.getMonth()];
+            const year = today.getFullYear();
+
+            const formattedDate = `${date}-${month}-${year}`;
             document.getElementById("islamic-date").textContent = new Intl.DateTimeFormat(today, options).format(today);
+            // document.getElementById("gregorian-date").textContent = formattedDate;
+
 
             if (todaysTimings) {
                 document.getElementById('tahajjud-starts').textContent = todaysTimings['tahajjud-starts'];
