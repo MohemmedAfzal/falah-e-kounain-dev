@@ -73,8 +73,8 @@ li{
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     margin-bottom: 10%;
 }
-.zuhar-timings{
-    margin-top: 10%;
+.different-namaz-timings{
+
     height: auto;
     text-align: center;
     background: white;
@@ -179,14 +179,14 @@ color: black;
         width: 100%;
         padding: 10px; /* Adjust padding for very small screens */
     }
-    .zuhar-timings{
+    .different-namaz-timings{
         width: 100%;
         padding: 10px; /* Adjust padding for very small screens */
     }
     .upcoming-namaz p{
         font-size: 14px; /* Adjust font size for very small screens */
     }
-    .zuhar-timings{
+    .different-namaz-timings{
         font-size: 14px;
     }
     #makrooh-prayer-timings p {

@@ -26,6 +26,7 @@ function fetchFarazNamazData(currentDate) {
             if (todaysTimings) {
                 fetchUpcomingNamaz(todaysTimings);
                 fetchZuharNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['zuhar']));
+                // fetchAsrNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['asar']))
 
                 document.getElementById('fajr-starts').textContent = excelTimeToJSTimeString(todaysTimings['fajr-starts']);
                 document.getElementById('fajr-azan').textContent = excelTimeToJSTimeString(todaysTimings['fajr-azan']);
@@ -224,7 +225,19 @@ function fetchZuharNamazTimingInOtherMasjid(zuharTimeString){
             populateTable(jsonData, zuharTime);
         });
 }
-function populateTable(data, zuharTime) {
+// function fetchAsrNamazTimingInOtherMasjid(asrTimeString){
+//     fetch('excel/zuhar-timings.xlsx')
+//         .then(response => response.arrayBuffer())
+//         .then(data => {
+//             const workbook = XLSX.read(data, { type: 'array' });
+//             const firstSheetName = workbook.SheetNames[0];
+//             const worksheet = workbook.Sheets[firstSheetName];
+//             const jsonData = XLSX.utils.sheet_to_json(worksheet);
+//             const asrTime = parseTimeString(asrTimeString);
+//             populateTable(jsonData, asrTime);
+//         });
+// }
+function populateTable(data, diffNamazTime) {
     const tableBody = document.getElementById('masjidTable').getElementsByTagName('tbody')[0];
     tableBody.innerHTML = ''; // Clear previous data
     data.forEach(row => {
@@ -235,7 +248,7 @@ function populateTable(data, zuharTime) {
 
         tdName.textContent = row['masjid'];
         tdTimeAdjustment.textContent = row['time'];
-        const adjustedTime = new Date(zuharTime);
+        const adjustedTime = new Date(diffNamazTime);
         adjustedTime.setMinutes(adjustedTime.getMinutes() + parseInt(row['time'], 10));
         tdZuharTime.textContent = formatTime(adjustedTime);
 
