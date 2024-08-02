@@ -72,22 +72,6 @@ function fetchNafilNamazData(currentDate) {
                 return excelDate.toDateString() === currentDate.toDateString();
             });
             const today = new Date();
-            // let currentIslamicMonth= " ";
-            // alert(today.toJSON())
-            // switch (today.getMonth().toString().toLowerCase()){
-            //     case "january":  currentIslamicMonth= "Muharram";
-            //     case "february":  currentIslamicMonth= "Safar";
-            //     case "march":  currentIslamicMonth= "Rabi-Ul-Awwal";
-            //     case "april":  currentIslamicMonth= "Rabi-Ul-Aakhir";
-            //     case "may":  currentIslamicMonth= "Jamadil-Awwal";
-            //     case "june":  currentIslamicMonth= "Jamadil-Aakhir";
-            //     case "july":  currentIslamicMonth= "Rajab";
-            //     case "august":  currentIslamicMonth= "Shabaan";
-            //     case "september":  currentIslamicMonth= "Ramazan";
-            //     case "october":  currentIslamicMonth= "Shawwal";
-            //     case "november":  currentIslamicMonth= "Zi-Qaida";
-            //     case "december":  currentIslamicMonth= "Zil-Hajj";
-            // }
             const options = {
                 day: 'numeric',
                 month: 'long',
@@ -95,19 +79,14 @@ function fetchNafilNamazData(currentDate) {
                 calendar: 'islamic',
                 timeZone: 'Asia/Kolkata'
             };
-            const date = String(today.getDate()).padStart(2, '0');
-
-            const monthNames = [
-                "January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"
-            ];
-            const month = monthNames[today.getMonth()];
-            const year = today.getFullYear();
-
-            const formattedDate = `${date}-${month}-${year}`;
-            document.getElementById("islamic-date").textContent = new Intl.DateTimeFormat(today, options).format(today);
-            // document.getElementById("gregorian-date").textContent = formattedDate;
-
+            var islamicDateFormat = new Intl.DateTimeFormat('en-IN', options).format(today).split(" ");
+            // console.log(islamicDateFormat);
+            var date = islamicDateFormat[0] - 2;
+            var month= getIslamicMonth(islamicDateFormat[1].split(",")[0]);
+            var islamicDate = date+" "+month+" "+islamicDateFormat[2]+" "+islamicDateFormat[3];
+            // console.log(islamicDate)
+            // console.log(getIslamicMonth(islamicDateFormat[1].split(",")[0]));
+            document.getElementById("islamic-date").textContent = islamicDate;
 
             if (todaysTimings) {
                 document.getElementById('tahajjud-starts').textContent = todaysTimings['tahajjud-starts'];
@@ -329,4 +308,35 @@ function formatTime(date) {
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
     return `${hours.toString().padStart(2, '0')}:${minutes} ${ampm}`;
+}
+
+function getIslamicMonth(month) {
+    switch (month.toString().toLowerCase()) {
+        case "january":
+            return "Muharram";
+        case "february":
+            return "Safar";
+        case "march":
+            return "Rabi-Ul-Awwal";
+        case "april":
+            return "Rabi-Ul-Aakhir";
+        case "may":
+            return "Jamadil-Awwal";
+        case "june":
+            return "Jamadil-Aakhir";
+        case "july":
+            return "Rajab";
+        case "august":
+            return "Shabaan";
+        case "september":
+            return "Ramazan";
+        case "october":
+            return "Shawwal";
+        case "november":
+            return "Zi-Qaida";
+        case "december":
+            return "Zil-Hajj";
+        default:
+            return month;
+    }
 }
