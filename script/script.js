@@ -145,20 +145,33 @@ function fetchMakroohNamazTimings(currentDate) {
 function excelTimeToJSTimeString(excelTime) {
     const totalSeconds = excelTime * 24 * 60 * 60;
     let hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    let minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = Math.floor(totalSeconds % 60);
-
     // Determine AM/PM and convert hours to 12-hour format
     const period = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-
+    if(minutes === 59){
+        hours=hours+1;
+        minutes=0;
+    }
     // Pad hours, minutes, and seconds with leading zeros if necessary
     const pad = (num) => num.toString().padStart(2, '0');
-
     return `${pad(hours)}:${pad(minutes)} ${period}`;
 }
+function excelTojs(excelTime){
+    const msInDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
+    const msSinceMidnight = excelTime * msInDay;
 
+    // Create a Date object starting at midnight (reference date)
+    const date = new Date(0, 0, 0, 0, 0, 0, msSinceMidnight);
+
+    // Optional: Adjust to your timezone if needed
+    const offset = date.getTimezoneOffset() * 60000; // Offset in milliseconds
+    const localDate = new Date(date.getTime() - offset);
+
+    return localDate;
+}
 function fetchUpcomingNamaz(todaysTimings) {
     const now = new Date();
     let hours = now.getHours();
