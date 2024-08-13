@@ -80,11 +80,9 @@ function fetchNafilNamazData(currentDate) {
             };
             var islamicDateFormat = new Intl.DateTimeFormat('en-IN', options).format(today).split(" ");
             // console.log(islamicDateFormat);
-            var date = islamicDateFormat[0] - 2;
+            var date = islamicDateFormat[0];
             var month= getIslamicMonth(islamicDateFormat[1].split(",")[0]);
-            var islamicDate = date+" "+month+" "+islamicDateFormat[2]+" "+islamicDateFormat[3];
-            // console.log(islamicDate)
-            // console.log(getIslamicMonth(islamicDateFormat[1].split(",")[0]));
+            var islamicDate = date+" "+month+" "+islamicDateFormat[2]+" "+"Hijri";
             document.getElementById("islamic-date").textContent = islamicDate;
 
             if (todaysTimings) {
@@ -159,19 +157,7 @@ function excelTimeToJSTimeString(excelTime) {
     const pad = (num) => num.toString().padStart(2, '0');
     return `${pad(hours)}:${pad(minutes)} ${period}`;
 }
-function excelTojs(excelTime){
-    const msInDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
-    const msSinceMidnight = excelTime * msInDay;
 
-    // Create a Date object starting at midnight (reference date)
-    const date = new Date(0, 0, 0, 0, 0, 0, msSinceMidnight);
-
-    // Optional: Adjust to your timezone if needed
-    const offset = date.getTimezoneOffset() * 60000; // Offset in milliseconds
-    const localDate = new Date(date.getTime() - offset);
-
-    return localDate;
-}
 function fetchUpcomingNamaz(todaysTimings) {
     const now = new Date();
     let hours = now.getHours();
@@ -183,7 +169,7 @@ function fetchUpcomingNamaz(todaysTimings) {
 
     const time = hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ' ' + ampm;
     const strTime = convertToTime(time);
-    if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['isha'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr']))) {
+    if (strTime >= 0 || strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['isha'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr']))) {
         document.getElementById('upcoming-namaz').textContent = "Fajr: " + excelTimeToJSTimeString(todaysTimings['fajr']);
     } else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar']))) {
         document.getElementById('upcoming-namaz').textContent = "Zuhar: " + excelTimeToJSTimeString(todaysTimings['zuhar']);
@@ -279,23 +265,24 @@ function populateTable(data, diffNamazTime, namazTime) {
         tableBody.innerHTML = ''; // Clear previous data
     } else if (namazTime === "isha") {
         tableBody = document.getElementById('masjidTableOnIsha').getElementsByTagName('tbody')[0];
+        tableBody.ariaSort;
     }
 
     data.forEach(row => {
         const tr = document.createElement('tr');
         const tdName = document.createElement('td');
         const tdTimeAdjustment = document.createElement('td');
-        const tdZuharTime = document.createElement('td');
+        const tdNamazTime = document.createElement('td');
 
         tdName.textContent = row['masjid'];
         tdTimeAdjustment.textContent = row['time'];
         const adjustedTime = new Date(diffNamazTime);
         adjustedTime.setMinutes(adjustedTime.getMinutes() + parseInt(row['time'], 10));
-        tdZuharTime.textContent = formatTime(adjustedTime);
+        tdNamazTime.textContent = formatTime(adjustedTime);
 
         tr.appendChild(tdName);
         tr.appendChild(tdTimeAdjustment);
-        tr.appendChild(tdZuharTime);
+        tr.appendChild(tdNamazTime);
         tableBody.appendChild(tr);
     });
 }
