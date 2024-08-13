@@ -17,7 +17,6 @@ function fetchFarazNamazData(currentDate) {
             const worksheet = workbook.Sheets[firstSheetName];
             const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
-
             const todaysTimings = jsonData.find(entry => {
                 const excelDate = new Date((entry.Date - (25567 + 2)) * 86400 * 1000);
                 return excelDate.toDateString() === currentDate.toDateString();
@@ -100,7 +99,7 @@ function fetchNafilNamazData(currentDate) {
                 document.getElementById('sehri').textContent = excelTimeToJSTimeString(todaysTimings['sehri']);
                 document.getElementById('iftari').textContent = excelTimeToJSTimeString(todaysTimings['iftari']);
             } else {
-                document.getElementById('namaz-timings').innerHTML = '<p>No timings available for today.</p>';
+                document.getElementById('nafil-prayer-card').innerHTML = '<p>No timings available for today.</p>';
             }
         })
         .catch(error => console.error('Error fetching the Excel file:', error));
@@ -137,7 +136,7 @@ function fetchMakroohNamazTimings(currentDate) {
                 document.getElementById('sunset-starts').textContent = excelTimeToJSTimeString(todaysTimings['sunset-starts']);
                 document.getElementById('sunset-ends').textContent = excelTimeToJSTimeString(todaysTimings['sunset-ends']);
             } else {
-                document.getElementById('namaz-timings').innerHTML = '<p>No timings available for today.</p>';
+                document.getElementById('makrooh-prayer-timing-card').innerHTML = '<p>No timings available for today.</p>';
             }
         })
         .catch(error => console.error('Error fetching the Excel file:', error));
