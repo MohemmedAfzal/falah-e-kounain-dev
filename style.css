@@ -42,7 +42,7 @@ body {
 }
 .nav .logo{
     width:100px;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
 }
 li{
     list-style: none;
