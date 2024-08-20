@@ -169,7 +169,7 @@ function fetchUpcomingNamaz(todaysTimings) {
 
     const time = hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ' ' + ampm;
     const strTime = convertToTime(time);
-    if (strTime >= '00:00' || strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['isha'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr']))) {
+    if (strTime >= '00:00' && strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['isha'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr']))) {
         document.getElementById('upcoming-namaz').textContent = "Fajr: " + excelTimeToJSTimeString(todaysTimings['fajr']);
     } else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['fajr'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar']))) {
         document.getElementById('upcoming-namaz').textContent = "Zuhar: " + excelTimeToJSTimeString(todaysTimings['zuhar']);
