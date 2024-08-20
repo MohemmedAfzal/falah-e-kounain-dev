@@ -176,7 +176,7 @@ function fetchUpcomingNamaz(todaysTimings) {
     } else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['zuhar'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['asar']))) {
         document.getElementById('upcoming-namaz').textContent = "Asar: " + excelTimeToJSTimeString(todaysTimings['asar']);
     } else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['asar'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['maghrib']))) {
-        document.getElementById('upcoming-namaz').textContent = "Magribh: " + excelTimeToJSTimeString(todaysTimings['maghrib']);
+        document.getElementById('upcoming-namaz').textContent = "Magrib: " + excelTimeToJSTimeString(todaysTimings['maghrib']);
     } else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['maghrib'])) && strTime <= convertToTime(excelTimeToJSTimeString(todaysTimings['isha']))) {
         document.getElementById('upcoming-namaz').textContent = "Isha: " + excelTimeToJSTimeString(todaysTimings['isha']);
     } else if (strTime >= convertToTime(excelTimeToJSTimeString(todaysTimings['isha']))) {
