@@ -1,0 +1,372 @@
+
+@keyframes upcoming-namaz {
+    0%   {font-size: 20px;}
+    25%  {font-size: 16px;}
+    50%  {font-size: 14px}
+    75%  {font-size: 16px}
+    100% {font-size: 20px;}
+}
+#upcoming-namaz {
+    color: red;
+    animation-name: upcoming-namaz;
+    animation-duration: 4s;
+    animation-iteration-count: 10;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: white;
+     font-family: "poppins", sans-serif;
+}
+.calendar{
+    font-family: "Roboto", sans-serif;;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: gray;
+}
+.calendar #gregorian-date{
+    padding-left: 20%;
+}
+.container{
+    height: auto;
+    max-width: 100%;
+}
+.upcoming-namaz{
+    height: auto;
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.different-namaz-timing-card,.zuhar-namaz-timings,.asr-namaz-timings,.faraz-namaz-card,.nafil-prayer-card, .makrooh-prayer-timing-card,.isha-namaz-timings{
+    margin-top: 10%;
+    height: auto;
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+}
+.zuhar-namaz-timings,.asr-namaz-timings{
+    margin-top: 0%;
+}
+#namaz-timings p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+table{
+    width: 100%;
+}
+table, th, tr,td{
+    border: 1px solid;
+    border-collapse: collapse;
+}
+th,td{
+    width: 20%;
+    padding: 15px;
+    text-align: left;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 2px solid white;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+th {
+    background-color: #04AA6D;
+    color: black;
+    border: 2px solid white;
+  }
+.nafil-prayer-card .makrooh-prayer-timing-card, .isha-namaz-timings th{
+    width: 33.3%;
+}
+
+.head{
+    background: #003d30;
+    color: white;
+}
+
+p{
+color: black;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav ul.show {
+        display: flex;
+    }
+    .faraz-namaz-card,.nafil-prayer-card {
+        width: 90%; /* Adjust faraz-namaz-card width for smaller screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    #namaz-timings p {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+
+    th, td {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+}
+
+@media (max-width: 500px) {
+    .faraz-namaz-card{
+        width: 100%; /* Adjust faraz-namaz-card width for very small screens */
+        padding: 10px; /* Adjust padding for very small screens */
+    }
+
+    .nafil-prayer-card{
+        width: 100%;
+        padding: 10px; /* Adjust padding for very small screens */
+    }
+    .upcoming-namaz{
+        width: 100%;
+        padding: 10px; /* Adjust padding for very small screens */
+    }
+    .makrooh-prayer-timing-card{
+        width: 100%;
+        padding: 10px; /* Adjust padding for very small screens */
+    }
+    .different-namaz-timing-card{
+        width: 100%;
+        padding: 10px; /* Adjust padding for very small screens */
+    }
+    .upcoming-namaz p{
+        font-size: 14px; /* Adjust font size for very small screens */
+    }
+    .zuhar-namaz-timings,.asr-namaz-timings,.isha-namaz-timings{
+        font-size: 14px;
+    }
+    #makrooh-prayer-timings p {
+        font-size: 14px; /* Adjust font size for very small screens */
+    }
+    #faraz-namaz-timings p {
+        font-size: 14px; /* Adjust font size for very small screens */
+    }
+    #nafil-namaz-timings p {
+        font-size: 14px; /* Adjust font size for very small screens */
+    }
+    th, td {
+        padding: 8px; /* Adjust padding for very small screens */
+    }
+    .nav{
+        flex-direction: row-reverse;
+        align-items: flex-start;
+    }
+    .nav img{
+        width: 5%;
+    }
+    li{
+        padding: 10px;
+    }
+    .nav-links{
+        width: 95%;
+        margin-top: 0;
+        display: block;
+        padding: 15px;
+        background-color: white;
+    }
+    .nav a{
+        color: black;
+    }
+    .nav-toggle {
+        margin: 10px;
+        display: block;
+        color: black;
+        padding: 10px;
+        background-color: white;
+    }
+    .calendar #islamic-date{
+        text-decoration-style: solid;
+        padding-left: 3%;
+    }
+    /*.calendar #gregorian-date{*/
+    /*    padding-left: 15%;*/
+    /*}*/
+}
+
+
+
+
+
+
+.animate__animated {
+    animation-duration: 2s;
+    animation-fill-mode: both;
+  }
+  
+  .animate__fadeInDown {
+    animation-name: fadeInDown;
+  }
+  
+  .animate__fadeInLeft {
+    animation-name: fadeInLeft;
+  }
+  
+  .animate__fadeInUp {
+    animation-name: fadeInUp;
+  }
+  
+  .animate__bounceIn {
+    animation-name: bounceIn;
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      transform: translate3d(0, -100%, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      transform: translate3d(0, -100%, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInLeft {
+    from {
+      transform: translate3d(-100%, 0, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      transform: translate3d(0, 100%, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes bounceIn {
+    from {
+      transform: scale3d(0.3, 0.3, 0.3);
+      opacity: 0;
+    }
+    to {
+      transform: scale3d(1, 1, 1);
+      opacity: 1;
+    }
+  }
+  /* Navbar */
+.navbar {
+    background-color: white;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    position: sticky;
+}
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+}
+.navbar .navbar-nav .nav-link {
+    font-weight: 700;
+    color: var(--c-dark);
+}
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active  {
+    color: #5f5f81;
+}
+.navbar-brand {
+    font-size: 24px;
+    font-weight: 700;
+    color: #303050;
+}
+.social-icon {
+    width: 36px;
+    height: 36px;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+    text-decoration: none;
+}
+.social-icon:hover {
+    background-color: transparent;
+}
+
+/* Btn */
+.btn {
+    padding: 10px 24px;
+    border-radius: 0;
+    border-width: 2px;
+    font-weight: 500;
+    color: white;
+}
+
+.btn-brand,
+.btn-brand:focus {
+    background-color:transparent;
+    color: black;
+    border-color:black;
+}
+
+.btn-brand:hover {
+    background-color: transparent;
+    color: black;
+    border-color: white;
+}
+#home {
+    background-image: url(images/mosque2.jpg);
+     width: 100%;
+    /* height: 100%; */ 
+    background-position: cover;
+    background-size: cover;
+}
+.col-md-6 {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+@media (min-width: 768px) {
+    .col-md-6 {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+.col-md-6 h1{
+    flex: 0 0 auto;
+    width: 100%;
+    font-size: 45px;
+    text-align: center;
+}
+
+

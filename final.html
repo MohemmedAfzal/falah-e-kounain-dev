@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambur Namaz Timings</title>
+    <link href="images/logo.png" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"> 
+          <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top data-target">
+        <div class="container">
+            <a class="navbar-brand" href="#">Falah-e-Kounain</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faraz-namaz-card">Faraz Namaz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nafil-prayer-card">Nafil Namaz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#makrooh-prayer-timing-card">Makrooh Timing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#different-namaz-timing-card">Namaz Timing</a>
+                    </li>
+                </ul> 
+                <ul class="navbar-nav flex-row">
+                    <li class="nav-item">
+                        <a target="_blank" class="social-icon" href="https://chat.whatsapp.com/IbKd5cRxKwQHRTA0z4soOU"><i class="ri-whatsapp-line"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section id="home" class="d-flex align-items-center justify-content-center min-vh-100 ">
+        <div class="container1">
+          <div class="row z-index:1">
+            <div class="col-md-6">
+              <h1 class="display-2 fw-bold animate__animated animate__fadeInDown ">
+                To Get Daily Namaz Timing Join the <span class="text-brand animate__animated animate__fadeInLeft">Whatsapp Group</span>
+              </h1>
+              <h4 class="mt-3 mb-5 animate__animated animate__fadeInUp">Talib-e-Duwa Falah-e-Kounain</h4>
+              <div>
+                <a target="_blank" href="https://chat.whatsapp.com/IbKd5cRxKwQHRTA0z4soOU" class="btn btn-brand animate__animated animate__bounceIn">Get Connected</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> 
+    <div class="calendar">
+        <h3 id="islamic-date"></h3>
+<!--        <h3 id="gregorian-date"></h3>-->
+<!--        <iframe id="gregorian-date" src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=medium&timezone=Asia%2FKolkata"-->
+<!--                width="100%" height="115" frameborder="0" seamless></iframe>-->
+    </div>
+    <div class="upcoming-namaz">
+        <table>
+            <tr>
+                <th>Upcoming-Namaz</th>
+                <td id="upcoming-namaz"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="faraz-namaz-card" id="faraz-namaz-card">
+        <h1>Farz Namaz Timings for Today</h1>
+        <div id="faraz-namaz-timings">
+            <table>
+                <th class="head">Prayer</th>
+                <th class="head">Prayer Timing Starts</th>
+                <th class="head">Azan Timing</th>
+                <th class="head">Iqaamat Timing</th>
+                <th class="head">Prayer Timing Ends</th>
+                <tr>
+                    <th>Fajar</th>
+                    <td><p id="fajr-starts"></p></td>
+                    <td><p id="fajr-azan"></p></td>
+                    <td><p id="fajr"></p></td>
+                    <td><p id="fajr-ends"></p></td>
+                </tr>
+                <tr>
+                    <th>Zuhar</th>
+                    <td><p id="zuhar-starts"></p></td>
+                    <td><p id="zuhar-azan"></p></td>
+                    <td><p id="zuhar"></p></td>
+                    <td><p id="zuhar-ends"></p></td>
+                </tr>
+                <tr>
+                    <th>Asar</th>
+                    <td><p id="asar-starts"></p></td>
+                    <td><p id="asar-azan"></p></td>
+                    <td><p id="asar"></p></td>
+                    <td><p id="asar-ends"></p></td>
+                </tr>
+                <tr>
+                    <th>Magrib</th>
+                    <td><p id="maghrib-starts"></p></td>
+                    <td><p id="maghrib-azan"></p></td>
+                    <td><p id="maghrib"></p></td>
+                    <td><p id="maghrib-ends"></p></td>
+                </tr>
+                <tr>
+                    <th>Isha</th>
+                    <td><p id="isha-starts"></p></td>
+                    <td><p id="isha-azan"></p></td>
+                    <td><p id="isha"></p></td>
+                    <td><p id="isha-ends"></p></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="nafil-prayer-card" id="nafil-prayer-card">
+        <h1>Nafil Timings For Today</h1>
+        <div id="nafil-namaz-timings">
+            <table>
+                <th class="head">Prayer</th>
+                <th class="head">Prayer Timing Starts</th>
+                <th class="head">Prayer Timing Ends</th>
+                <tr>
+                    <th>Tahajud</th>
+                    <td><p id="tahajjud-starts"></p></td>
+                    <td><p id="tahajjud-ends"></p></td>
+                </tr>
+                <tr>
+                    <th>Ishraaq</th>
+                    <td><p id="isharaque-starts"></p></td>
+                    <td><p id="isharaque-ends"></p></td>
+                </tr>
+                <tr>
+                    <th>Chasth</th>
+                    <td><p id="chast-starts"></p></td>
+                    <td><p id="chast-ends"></p></td>
+                </tr>
+                <tr>
+                    <th>Awwabeen</th>
+                    <td><p id="awwabeen-starts"></p></td>
+                    <td><p id="awwabeen-ends"></p></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th class="head">Sehri</th>
+                    <th class="head">Iftari</th>
+
+                </tr>
+                <tr>
+                    <td><p id="sehri"></p></td>
+                    <td><p id="iftari"></p></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="makrooh-prayer-timing-card" id="makrooh-prayer-timing-card">
+        <h1>Makrooh Prayer Timings for Today</h1>
+        <div id="makrooh-prayer-timings">
+            <table>
+                <th class="head">Timing</th>
+                <th class="head">Starts</th>
+                <th class="head">Ends</th>
+                <tr>
+                    <th>Tulu-E-Aftaab(Sunrise)</th>
+                    <td><p id="sunrise-starts"></p></td>
+                    <td><p id="sunrise-ends"></p></td>
+                </tr>
+                <tr>
+                    <th>Junoob-E-Aftaab</th>
+                    <td><p id="junoob-starts"></p></td>
+                    <td><p id="junoob-ends"></p></td>
+                </tr>
+                <tr>
+                    <th>Ghuroob-E-Aftaab(Sunset)</th>
+                    <td><p id="sunset-starts"></p></td>
+                    <td><p id="sunset-ends"></p></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="different-namaz-timing-card" id="different-namaz-timing-card">
+        <h1>Namaz Timing in Other Masjid for Today</h1>
+        <div class="zuhar-namaz-timings">
+            <table id="masjidTable">
+                <thead>
+                <tr>
+                    <th>Masjid Name</th>
+                    <th>Time Adjustment (minutes)</th>
+                    <th>Zuhar Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="asr-namaz-timings">
+            <table id="masjidTableOnAsr">
+                <thead>
+                <tr>
+                    <th>Masjid Name</th>
+                    <th>Time Adjustment (minutes)</th>
+                    <th>Asar Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="isha-namaz-timings">
+            <table id="masjidTableOnIsha">
+                <thead>
+                <tr>
+                    <th>Masjid Name</th>
+                    <th>Time Adjustment (minutes)</th>
+                    <th>Isha Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script/script.js"></script>
+
+</body>
+</html>
