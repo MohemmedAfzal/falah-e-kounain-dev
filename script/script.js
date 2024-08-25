@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('nav-toggle').onclick = function () {
-        document.getElementById('nav-links').classList.toggle('show');
-    }
+    // document.getElementById('nav-toggle').onclick = function () {
+    //     document.getElementById('nav-links').classList.toggle('show');
+    // }
     const currentDate = new Date();
     fetchFarazNamazData(currentDate);
     fetchNafilNamazData(currentDate);
