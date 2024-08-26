@@ -20,12 +20,20 @@ body {
     background-color: white;
      font-family: "poppins", sans-serif;
 }
+
+
+
+.navbar-brand {
+  padding: 10px;  /* New style added */
+}
+
 .calendar{
     font-family: "Roboto", sans-serif;;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+   justify-content:center;   /* changed space-between to center */
     color: gray;
+    padding: 10px;  /* New style added */
 }
 .calendar #gregorian-date{
     padding-left: 20%;
@@ -33,6 +41,7 @@ body {
 .container{
     height: auto;
     max-width: 100%;
+    padding: 0;   /* New style added */
 }
 .upcoming-namaz{
     height: auto;
@@ -43,7 +52,7 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 .different-namaz-timing-card,.zuhar-namaz-timings,.asr-namaz-timings,.faraz-namaz-card,.nafil-prayer-card, .makrooh-prayer-timing-card,.isha-namaz-timings{
-    margin-top: 10%;
+   margin-top: 5%;    /*Changed 10% to 5% */
     height: auto;
     text-align: center;
     background: white;
@@ -69,7 +78,7 @@ table, th, tr,td{
 th,td{
     width: 20%;
     padding: 15px;
-    text-align: left;
+     text-align: center; /* Changed left to center */
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
     border: 2px solid white;
@@ -81,6 +90,7 @@ th {
     background-color: #04AA6D;
     color: black;
     border: 2px solid white;
+    text-align: center; /* New style added */
   }
 .nafil-prayer-card .makrooh-prayer-timing-card, .isha-namaz-timings th{
     width: 33.3%;
@@ -89,14 +99,44 @@ th {
 .head{
     background: #003d30;
     color: white;
+    text-align: center;  /* New style added */
 }
 
 p{
 color: black;
+text-align: center;
 }
 
+/* footer-added */
 
 
+.footer-connect {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+   
+}
+ 
+    .footer-connect button {
+        
+        color: #04AA6D;
+        background-color: #f2f2f2;
+        border-top-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .footer-connect button:hover{
+        color: rgb(6, 6, 6);
+        background-color: #04AA6D;
+    }
+   
+    .footer-connect button a{
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+    }
+    
 
 @media (max-width: 768px) {
     .nav ul {
@@ -109,7 +149,7 @@ color: black;
         display: flex;
     }
     .faraz-namaz-card,.nafil-prayer-card {
-        width: 90%; /* Adjust faraz-namaz-card width for smaller screens */
+        width: 100%; /*Changed 90% to 100% */
         padding: 15px; /* Adjust padding for smaller screens */
     }
 
@@ -119,6 +159,7 @@ color: black;
 
     th, td {
         padding: 10px; /* Adjust padding for smaller screens */
+        font-size: 12px;
     }
 }
 
@@ -126,6 +167,9 @@ color: black;
     .faraz-namaz-card{
         width: 100%; /* Adjust faraz-namaz-card width for very small screens */
         padding: 10px; /* Adjust padding for very small screens */
+    }
+    .head{
+         font-size: 12px;
     }
 
     .nafil-prayer-card{
@@ -143,25 +187,42 @@ color: black;
     .different-namaz-timing-card{
         width: 100%;
         padding: 10px; /* Adjust padding for very small screens */
+        font-size: 12px;
     }
     .upcoming-namaz p{
         font-size: 14px; /* Adjust font size for very small screens */
     }
     .zuhar-namaz-timings,.asr-namaz-timings,.isha-namaz-timings{
-        font-size: 14px;
+        font-size: 15px;
+    }
+    .zuhar-namaz-timings,.asr-namaz-timings,.isha-namaz-timings p{
+        font-size: 15px;
     }
     #makrooh-prayer-timings p {
-        font-size: 14px; /* Adjust font size for very small screens */
+        font-size: 12px; /* Adjust font size for very small screens */
     }
     #faraz-namaz-timings p {
-        font-size: 14px; /* Adjust font size for very small screens */
+        font-size: 12px; /* Adjust font size for very small screens */
     }
     #nafil-namaz-timings p {
-        font-size: 14px; /* Adjust font size for very small screens */
+        font-size: 12px; /* Adjust font size for very small screens */
     }
-    th, td {
-        padding: 8px; /* Adjust padding for very small screens */
+    #masjidTable td {
+        padding: 8px;
+        font-size: 12px; /* Adjust padding for very small screens */
     }
+    #masjidTableOnAsr td{
+        padding: 8px;
+        font-size: 12px; /* Adjust padding for very small screens */
+    }
+    #masjidTableOnIsha td{
+        padding: 8px;
+        font-size: 12px; /* Adjust padding for very small screens */
+    } td{
+        padding: 8px;
+        font-size: 12px; /* Adjust padding for very small screens */
+    }
+
     .nav{
         flex-direction: row-reverse;
         align-items: flex-start;
@@ -196,6 +257,18 @@ color: black;
     /*.calendar #gregorian-date{*/
     /*    padding-left: 15%;*/
     /*}*/
+}
+@media (max-width: 300px) {
+    .faraz-namaz-card{
+        width: 100%; /* Adjust faraz-namaz-card width for very small screens */
+        padding: 0px /* Adjust padding for very small screens */
+    }
+    .col-md-6 h1 {
+        flex: 0 0 auto;
+        width: 100%;
+        font-size: 30px;
+        text-align: center;
+    }
 }
 
 
@@ -303,6 +376,7 @@ color: black;
     font-size: 24px;
     font-weight: 700;
     color: #303050;
+
 }
 .social-icon {
     width: 36px;
