@@ -1,11 +1,11 @@
 
-@keyframes upcoming-namaz {
+/* @keyframes upcoming-namaz {
     0%   {font-size: 20px;}
     25%  {font-size: 16px;}
     50%  {font-size: 14px}
     75%  {font-size: 16px}
     100% {font-size: 20px;}
-}
+} */
 #upcoming-namaz {
     color: red;
     animation-name: upcoming-namaz;
@@ -20,6 +20,7 @@ body {
     background-color: white;
      font-family: "poppins", sans-serif;
 }
+
 
 
 
@@ -136,13 +137,24 @@ text-align: center;
         color: black;
         cursor: pointer;
     }
-    
+    .col-md-6 h1{
+        flex: 0 0 auto;
+        width: 100%;
+        font-size: 40px;
+        text-align: center;
+    }
 
 @media (max-width: 768px) {
     .nav ul {
         display: none;
         flex-direction: column;
         width: 100%;
+    }
+    .col-md-6 h1{
+        flex: 0 0 auto;
+        width: 100%;
+        font-size: 40px;
+        text-align: center;
     }
 
     .nav ul.show {
@@ -156,7 +168,9 @@ text-align: center;
     #namaz-timings p {
         font-size: 16px; /* Adjust font size for smaller screens */
     }
-
+    .row{
+        margin: 0;
+    }
     th, td {
         padding: 10px; /* Adjust padding for smaller screens */
         font-size: 12px;
@@ -170,6 +184,12 @@ text-align: center;
     }
     .head{
          font-size: 12px;
+    }
+    .col-md-6 h1{
+        flex: 0 0 auto;
+        width: 100%;
+        font-size: 30px;
+        text-align: center;
     }
 
     .nafil-prayer-card{
@@ -254,6 +274,13 @@ text-align: center;
         text-decoration-style: solid;
         padding-left: 3%;
     }
+    .row{
+        margin: 0;
+    }
+    th, td {
+        padding: 8px;
+        font-size: 12px;
+    }
     /*.calendar #gregorian-date{*/
     /*    padding-left: 15%;*/
     /*}*/
@@ -268,6 +295,20 @@ text-align: center;
         width: 100%;
         font-size: 30px;
         text-align: center;
+    }
+    .row{
+        margin: 0;
+    }
+    th, td {
+        padding: 8px;
+        font-size: 12px;
+    }
+    #upcoming-namaz {
+        color: red;
+        animation-name: upcoming-namaz;
+        animation-duration: 4s;
+        animation-iteration-count: 10;
+        font-size: 15px;
     }
 }
 
@@ -357,12 +398,17 @@ text-align: center;
     transition: var(--transition);
     box-shadow: var(--shadow);
     position: sticky;
+    padding: 10px;
 }
 @media (min-width: 992px) {
     .navbar-expand-lg .navbar-nav .nav-link {
         padding-right: 16px;
         padding-left: 16px;
     }
+    .row{
+        margin: 0;
+    }
+  
 }
 .navbar .navbar-nav .nav-link {
     font-weight: 700;
@@ -435,15 +481,14 @@ text-align: center;
         flex: 0 0 auto;
         width: 100%;
     }
+    .row{
+        margin: 0;
+    }
+    
+    td{
+        font-size: 18px;
+    }
 }
-.col-md-6 h1{
-    flex: 0 0 auto;
-    width: 100%;
-    font-size: 45px;
-    text-align: center;
-}
-td{
-    font-size: 18px;
-}
+
 
 
