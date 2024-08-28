@@ -179,7 +179,7 @@ text-align: center;
 
 @media (max-width: 500px) {
     .faraz-namaz-card{
-        width: 107%; /* Adjust faraz-namaz-card width for very small screens */
+        width: 100%; /* Adjust faraz-namaz-card width for very small screens */
         padding: 5px; /* Adjust padding for very small screens */
     }
     .head{
@@ -193,11 +193,11 @@ text-align: center;
     }
 
     .nafil-prayer-card{
-        width: 107%;
+        width: 100%;
         padding: 5px; /* Adjust padding for very small screens */
     }
     .upcoming-namaz{
-        width: 107%;
+        width: 100%;
         padding: 5px; /* Adjust padding for very small screens */
     }
     .makrooh-prayer-timing-card{
