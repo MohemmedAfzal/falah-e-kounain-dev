@@ -488,4 +488,72 @@ text-align: center;
         font-size: 18px;
     }
 }
+/*Date picker*/
+.date-container {
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+#dateInput{
+    padding: 8px 8px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
 
+/* Button Styling */
+#date-button {
+    padding: 10px 20px;
+    background-color: #04AA6D;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .date-container {
+        padding: 15px 20px;
+    }
+
+    #date-button {
+        width: 52%;
+        padding: 10px;
+    }
+}
+/* Styles for the custom alert box */
+.custom-alert {
+    margin-right: 700px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #4a90e2, #0072ff); /* Gradient background */
+    color: white;
+    padding: 15px 25px;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: none; /* Hidden by default */
+    z-index: 1000; /* Appear above other elements */
+    opacity: 0;
+    transform: translateY(-20px); /* Slide-in effect */
+    transition: opacity 0.4s ease, transform 0.4s ease; /* Smooth transition */
+    font-family: Arial, sans-serif; /* Custom font */
+    font-size: 14px; /* Font size */
+    overflow: hidden;
+}
+
+.custom-alert.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0); /* Slide-in effect on show */
+}
+@media (max-width: 768px) {
+    .custom-alert {
+        margin-right: 50px;
+    }
+}
