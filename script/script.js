@@ -1,14 +1,32 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // document.getElementById('nav-toggle').onclick = function () {
-    //     document.getElementById('nav-links').classList.toggle('show');
-    // }
-    const currentDate = new Date();
+    let currentDate = new Date();
+    console.log(currentDate)
     fetchFarazNamazData(currentDate);
     fetchNafilNamazData(currentDate);
     fetchMakroohNamazTimings(currentDate);
 });
+document.getElementById('date-button').onclick = function () {
+    let dateInput = document.getElementById('dateInput').value;
+    // Convert the string to a Date object (if needed)
+    let selectedDate = new Date(dateInput);
+    // Log the date
+    let currentDate = new Date(selectedDate);
+    showLog("Selected "+ currentDate.toDateString())
+    fetchFarazNamazData(currentDate,true);
+    fetchNafilNamazData(currentDate);
+    fetchMakroohNamazTimings(currentDate);
+}
+function showLog(message) {
+    const alertBox = document.getElementById('customAlert');
+    alertBox.textContent = message;
+    alertBox.classList.add('show');
 
-function fetchFarazNamazData(currentDate) {
+    // Automatically hide the alert after 3 seconds
+    setTimeout(() => {
+        alertBox.classList.remove('show');
+    }, 3000);
+}
+function fetchFarazNamazData(currentDate,datePicker) {
     fetch('excel/namaz-timings.xlsx') // Adjust the path to your Excel file
         .then(response => response.arrayBuffer())
         .then(data => {
@@ -26,8 +44,8 @@ function fetchFarazNamazData(currentDate) {
                 fetchUpcomingNamaz(todaysTimings);
                 fetchZuharNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['zuhar']));
                 fetchAsrNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['asar']));
-                fetchIshaEarlyNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['isha-azan']));
-                fetchIshaLaterNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['isha']))
+                fetchIshaEarlyNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['isha-azan']),datePicker);
+                fetchIshaLaterNamazTimingInOtherMasjid(excelTimeToJSTimeString(todaysTimings['isha']),datePicker);
 
                 document.getElementById('fajr-starts').textContent = excelTimeToJSTimeString(todaysTimings['fajr-starts']);
                 document.getElementById('fajr-azan').textContent = excelTimeToJSTimeString(todaysTimings['fajr-azan']);
@@ -81,8 +99,8 @@ function fetchNafilNamazData(currentDate) {
             var islamicDateFormat = new Intl.DateTimeFormat('en-IN', options).format(today).split(" ");
             // console.log(islamicDateFormat);
             var date = islamicDateFormat[0];
-            var month= getIslamicMonth(islamicDateFormat[1].split(",")[0]);
-            var islamicDate = date+" "+month+" "+islamicDateFormat[2]+" "+"Hijri";
+            var month = getIslamicMonth(islamicDateFormat[1].split(",")[0]);
+            var islamicDate = date + " " + month + " " + islamicDateFormat[2] + " " + "Hijri";
             document.getElementById("islamic-date").textContent = islamicDate;
 
             if (todaysTimings) {
@@ -149,9 +167,9 @@ function excelTimeToJSTimeString(excelTime) {
     const period = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-    if(minutes === 59){
-        hours=hours+1;
-        minutes=0;
+    if (minutes === 59) {
+        hours = hours + 1;
+        minutes = 0;
     }
     // Pad hours, minutes, and seconds with leading zeros if necessary
     const pad = (num) => num.toString().padStart(2, '0');
@@ -229,7 +247,11 @@ function fetchAsrNamazTimingInOtherMasjid(asrTimeString) {
         });
 }
 
-function fetchIshaEarlyNamazTimingInOtherMasjid(ishaTimeString) {
+function fetchIshaEarlyNamazTimingInOtherMasjid(ishaTimeString,datePicker) {
+    if(datePicker){
+        tableBody = document.getElementById('masjidTableOnIsha').getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = '';
+    }
     fetch('excel/isha-early-timings.xlsx')
         .then(response => response.arrayBuffer())
         .then(data => {
@@ -242,7 +264,11 @@ function fetchIshaEarlyNamazTimingInOtherMasjid(ishaTimeString) {
         });
 }
 
-function fetchIshaLaterNamazTimingInOtherMasjid(ishaTimeString) {
+function fetchIshaLaterNamazTimingInOtherMasjid(ishaTimeString,datePicker) {
+    if(datePicker){
+        tableBody = document.getElementById('masjidTableOnIsha').getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = '';
+    }
     fetch('excel/isha-later-timings.xlsx')
         .then(response => response.arrayBuffer())
         .then(data => {
